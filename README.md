@@ -1,2 +1,3 @@
 # Playwright-Typescript-Project
-Playwright typescript bootcamp March 2025
+Based on The Test Tribe Playwright Typescript Bootcamp March 2025
+
