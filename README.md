@@ -31,3 +31,6 @@
 - Fixtures
 - Reports
 - API testing
+
+## 🙏 Acknowledgments
+- This project is based on the **Playwright Bootcamp March 2025** by Vignesh Srinivasa Raghavan and organized by **The Test Tribe**. Their support and guidance were key to building this project.
