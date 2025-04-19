@@ -1,0 +1,17 @@
+{
+  "name": "playwright-typescript-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/luxon": "^3.6.2",
+    "@types/node": "^22.13.10",
+    "csv-parse": "^5.6.0",
+    "luxon": "^3.6.1"
+  }
+}
