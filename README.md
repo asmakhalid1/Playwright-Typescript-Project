@@ -1,18 +1,33 @@
-# Playwright-Typescript-Project
-Note: This project is still work in progress, I am working towards covering some more topis in framework.
-Tools needed to install: Node, Java, Visual Studio Code, Typescript, Git
-Topics covered in this project:
-Locator strategies
-Assetions
-UI elements
-Advanced UI elements
-Framework topics covered so far:
-Hooks
-Grouping test
-Annotations
-Tags
-Capture screenshot
-Record Video
-Parametrize test
-Read data from JSON
-Read data from CSV
+# Playwright with TypeScript – UI Test Automation Project
+
+> ⚠️ **Note:** This project is a work in progress. I am actively expanding it to include additional framework features.
+
+## 🛠 Tools Used
+- Node.js
+- Java
+- Visual Studio Code
+- TypeScript
+- Git
+
+## ✅ Topics Covered
+- Code generation
+- Trace viewer
+- Locator strategies
+- Working with various selectors and UI elements  
+- Assertions
+
+### 🧱 Framework Features Implemented So Far
+- Hooks
+- Grouping tests
+- Annotations and Tags
+- Capture screenshots
+- Record videos of test runs
+- Parameterized tests
+- Data-driven testing:
+  - Read test data from JSON
+  - Read test data from CSV
+
+### 🚧 Next Steps
+- Fixtures
+- Reports
+- API testing
