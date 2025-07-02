@@ -2,7 +2,9 @@
   "name": "playwright-typescript-project",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pretest": "npm install && npx playwright install && npm run clean:reports"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
