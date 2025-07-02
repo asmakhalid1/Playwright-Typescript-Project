@@ -26,9 +26,11 @@
 - Data-driven testing:
   - Read test data from JSON
   - Read test data from CSV
+- Page Object Model Implementation
+- Base Page Implementation
+- Fixtures
 
 ### 🚧 Next Steps
-- Fixtures
 - Reports
 - API testing
 
