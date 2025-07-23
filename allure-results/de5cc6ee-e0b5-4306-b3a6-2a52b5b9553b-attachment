@@ -1,0 +1,51 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Orange HRM Login Test with valid credentials
+- Location: C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\pageObjectModelTestWithFixture.spec.ts:3:5
+
+# Error details
+
+```
+Error: locator.waitFor: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('[name="username"]') to be visible
+
+    at LoginPage.b_waitForElementVisible (C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\pages\basepage.ts:20:23)
+    at LoginPage.b_fillField (C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\pages\basepage.ts:16:20)
+    at LoginPage.enterUserName (C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\pages\loginPage.ts:20:20)
+    at C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\pageObjectModelTestWithFixture.spec.ts:6:21
+```
+
+# Test source
+
+```ts
+   1 | import { Page, Locator } from "@playwright/test";
+   2 |
+   3 | export default class BasePage{
+   4 |     readonly page:Page;
+   5 |     constructor(page:Page){
+   6 |         this.page = page;
+   7 |     }
+   8 |     async b_navigateTo(url:string){
+   9 |         await this.page.goto(url);
+  10 |     }
+  11 |     async b_clickElement(element:Locator){
+  12 |         await this.b_waitForElementVisible(element);
+  13 |         await element.click();
+  14 |     }
+  15 |     async b_fillField(element:Locator, textToEnter:string){
+  16 |         await this.b_waitForElementVisible(element);
+  17 |         await element.fill(textToEnter);
+  18 |     }
+  19 |     async b_waitForElementVisible(element:Locator, maxTimeout?:number){
+> 20 |         await element.waitFor({state:"visible", timeout:maxTimeout});
+     |                       ^ Error: locator.waitFor: Test timeout of 30000ms exceeded.
+  21 |     }
+  22 | }
+```

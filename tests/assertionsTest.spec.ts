@@ -72,7 +72,7 @@ test("Screenshot Assertion", async({page})=>{
     //test is failing because the original screenshot was taken after entering username but not password 
 })
 
-test.only("Enabled/disabled Assertion", async({page})=>{
+test("Enabled/disabled Assertion", async({page})=>{
     await page.goto("https://letcode.in/button");
     await expect(page.locator('#home')).toBeEnabled();
     await expect(page.locator('[title="Disabled button"]')).toBeDisabled();

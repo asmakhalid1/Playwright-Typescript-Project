@@ -1,0 +1,61 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Drag and drop - Approach 2
+- Location: C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\dragAndDropHandling.spec.ts:15:5
+
+# Error details
+
+```
+Error: page.goto: net::ERR_NAME_NOT_RESOLVED at http://dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html
+Call log:
+  - navigating to "http://dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html", waiting until "load"
+
+    at C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\dragAndDropHandling.spec.ts:16:16
+```
+
+# Page snapshot
+
+```yaml
+- heading "This site can’t be reached" [level=1]
+- paragraph: Check if there is a typo in dhtmlgoodies.com.
+- paragraph
+- list:
+  - listitem:
+    - text: If spelling is correct,
+    - link "try running Windows Network Diagnostics"
+    - text: .
+- text: DNS_PROBE_FINISHED_NXDOMAIN
+- button "Reload"
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from "@playwright/test";
+   2 |
+   3 | test('Drag and drop - Approach 1',async({page})=>{
+   4 |     await page.goto('http://dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html');
+   5 |     /*we are using the xpath to div and text because the id contains numbers, 
+   6 |      which can be problematic sometimes*/
+   7 |     const washington = page.locator('//div[@id="box3"] [text()="Washington"]');
+   8 |     const unitedstates = page.locator('//div[@id="box103"] [text()="United States"]');
+   9 |     await washington.hover();
+  10 |     await page.mouse.down();
+  11 |     await unitedstates.hover();
+  12 |     await page.mouse.up();
+  13 | })
+  14 |
+  15 | test('Drag and drop - Approach 2',async({page})=>{
+> 16 |     await page.goto('http://dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html');
+     |                ^ Error: page.goto: net::ERR_NAME_NOT_RESOLVED at http://dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html
+  17 |     const washington = page.locator('//div[@id="box3"] [text()="Washington"]');
+  18 |     const unitedstates = page.locator('//div[@id="box103"] [text()="United States"]');
+  19 |     await washington.dragTo(unitedstates);
+  20 | })
+```

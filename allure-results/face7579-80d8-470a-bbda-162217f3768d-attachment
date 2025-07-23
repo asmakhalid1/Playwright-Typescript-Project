@@ -1,0 +1,178 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: test
+- Location: C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\codeGenTest.spec.ts:3:5
+
+# Error details
+
+```
+Error: locator.click: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for getByRole('listitem').filter({ hasText: 'manda user' }).locator('i')
+
+    at C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\codeGenTest.spec.ts:10:83
+```
+
+# Page snapshot
+
+```yaml
+- complementary:
+  - navigation "Sidepanel":
+    - link "client brand banner":
+      - img "client brand banner"
+    - textbox "Search"
+    - button ""
+    - separator
+    - list:
+      - listitem:
+        - link "Admin"
+      - listitem:
+        - link "PIM"
+      - listitem:
+        - link "Leave"
+      - listitem:
+        - link "Time"
+      - listitem:
+        - link "Recruitment"
+      - listitem:
+        - link "My Info"
+      - listitem:
+        - link "Performance"
+      - listitem:
+        - link "Dashboard"
+      - listitem:
+        - link "Directory"
+      - listitem:
+        - link "Maintenance"
+      - listitem:
+        - link "Claim":
+          - img
+          - text: Claim
+      - listitem:
+        - link "Buzz"
+- banner:
+  - heading "Dashboard" [level=6]
+  - link "Upgrade":
+    - button "Upgrade"
+  - list:
+    - listitem:
+      - img "profile picture"
+      - paragraph: p test31
+      - text: 
+  - navigation "Topbar Menu":
+    - list:
+      - button ""
+- text: 
+- paragraph: Time at Work
+- separator
+- img "profile picture"
+- paragraph: Punched Out
+- paragraph: "Punched Out: Mar 29th at 01:19 PM (GMT 7)"
+- text: 0h 0m Today
+- button ""
+- separator
+- paragraph: This Week
+- paragraph: Jul 14 - Jul 20
+- text: 
+- paragraph: 0h 0m
+- text: 
+- paragraph: My Actions
+- separator
+- button
+- paragraph: (1) Pending Self Review
+- button
+- paragraph: (1) Candidate to Interview
+- text: 
+- paragraph: Quick Launch
+- separator
+- button "Assign Leave"
+- paragraph: Assign Leave
+- button "Leave List"
+- paragraph: Leave List
+- button "Timesheets"
+- paragraph: Timesheets
+- button "Apply Leave"
+- paragraph: Apply Leave
+- button "My Leave"
+- paragraph: My Leave
+- button "My Timesheet"
+- paragraph: My Timesheet
+- text: 
+- paragraph: Buzz Latest Posts
+- separator
+- img "profile picture"
+- paragraph: p fdds test31
+- paragraph: 2025-16-07 10:16 AM
+- separator
+- paragraph: Baiulus tantillus sursum tergiversatio. Beneficium ago audacia spiculum ocer corrumpo bene. Cado suggero culpa.
+- img "profile picture"
+- paragraph: p fdds test31
+- paragraph: 2025-16-07 10:11 AM
+- separator
+- paragraph: Adeo ea unde. Xiphias ipsa defetiscor explicabo aqua cicuta apostolus culpa animi molestiae. Cetera in appositus suffragium animadverto solium.
+- img "profile picture"
+- paragraph: p fdds test31
+- paragraph: 2025-16-07 10:09 AM
+- separator
+- paragraph: Totidem ab versus contigo capillus. Coniuratio caveo communis amor officia. Admiratio patruus aliquid vitiosus cuppedia.
+- img "profile picture"
+- paragraph: p fdds test31
+- paragraph: 2025-16-07 10:09 AM
+- separator
+- paragraph: Ad blandior tondeo cavus terminatio aro beatae. Sustineo demitto averto vito taedium atque vaco adsidue verumtamen ambitus. Volutabrum animus tubineus.
+- img "profile picture"
+- paragraph: p fdds test31
+- paragraph: 2025-16-07 10:07 AM
+- separator
+- paragraph: Vulgaris urbs somnus tepesco ventosus demo surculus ustilo libero. Canonicus urbs minus placeat suffragium compello tres statim iste synagoga. Porro nesciunt vox.
+- paragraph: Employees on Leave Today
+- text: 
+- separator
+- img "No Content"
+- paragraph: No Employees are on Leave Today
+- text: 
+- paragraph: Employee Distribution by Sub Unit
+- separator
+- list:
+  - listitem: Engineering
+  - listitem: Human Resources
+  - listitem: Administration
+  - listitem: Client Services
+  - listitem: Unassigned
+- text: 
+- paragraph: Employee Distribution by Location
+- separator
+- list:
+  - listitem: Texas R&D
+  - listitem: New York Sales Office
+  - listitem: Unassigned
+- paragraph: OrangeHRM OS 5.7
+- paragraph:
+  - text: © 2005 - 2025
+  - link "OrangeHRM, Inc"
+  - text: . All rights reserved.
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | test('test', async ({ page }) => {
+   4 |   await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+   5 |   await page.getByRole('textbox', { name: 'Username' }).click();
+   6 |   await page.getByRole('textbox', { name: 'Username' }).fill('Admin');
+   7 |   await page.getByRole('textbox', { name: 'Password' }).click();
+   8 |   await page.getByRole('textbox', { name: 'Password' }).fill('admin123');
+   9 |   await page.getByRole('button', { name: 'Login' }).click();
+> 10 |   await page.getByRole('listitem').filter({ hasText: 'manda user' }).locator('i').click();
+     |                                                                                   ^ Error: locator.click: Test timeout of 30000ms exceeded.
+  11 |   await page.getByRole('menuitem', { name: 'Logout' }).click();
+  12 | });
+```

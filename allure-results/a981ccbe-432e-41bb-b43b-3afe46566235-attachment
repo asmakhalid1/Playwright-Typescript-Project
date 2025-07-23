@@ -1,0 +1,150 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Screenshot Assertion
+- Location: C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\assertionsTest.spec.ts:67:5
+
+# Error details
+
+```
+Error: expect(page).toHaveScreenshot(expected)
+
+  2179 pixels (ratio 0.01 of all image pixels) are different.
+
+Expected: C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\assertionsTest.spec.ts-snapshots\Screenshot-Assertion-1-chromium-win32.png
+Received: C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\test-results\assertionsTest-Screenshot-Assertion-chromium\Screenshot-Assertion-1-actual.png
+    Diff: C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\test-results\assertionsTest-Screenshot-Assertion-chromium\Screenshot-Assertion-1-diff.png
+
+Call log:
+  - expect.toHaveScreenshot with timeout 5000ms
+    - verifying given screenshot expectation
+  - taking page screenshot
+    - disabled all CSS animations
+  - waiting for fonts to load...
+  - fonts loaded
+  - 2179 pixels (ratio 0.01 of all image pixels) are different.
+  - waiting 100ms before taking screenshot
+  - taking page screenshot
+    - disabled all CSS animations
+  - waiting for fonts to load...
+  - fonts loaded
+  - captured a stable screenshot
+  - 2179 pixels (ratio 0.01 of all image pixels) are different.
+
+    at C:\PlaywrightBootcamp2025\Playwright-Typescript-Project\tests\assertionsTest.spec.ts:71:24
+```
+
+# Page snapshot
+
+```yaml
+- img "company-branding"
+- heading "Login" [level=5]
+- paragraph: "Username : Admin"
+- paragraph: "Password : admin123"
+- text:  Username
+- textbox "Username": Admin
+- text:  Password
+- textbox "Password": admin123
+- button "Login"
+- paragraph: Forgot your password?
+- link
+- link
+- link
+- link
+- paragraph: OrangeHRM OS 5.7
+- paragraph:
+  - text: © 2005 - 2025
+  - link "OrangeHRM, Inc"
+  - text: . All rights reserved.
+- img "orangehrm-logo"
+```
+
+# Test source
+
+```ts
+   1 | import {test, expect} from '@playwright/test'
+   2 |
+   3 | test("Visible/Hidden Assertion", async({page})=>{
+   4 |     await page.goto("https://www.letskodeit.com/practice");
+   5 |     await expect(page.locator('[name="show-hide"]')).toBeVisible();
+   6 |     await page.locator('[name="show-hide"]').fill('AsmaK');
+   7 |     await page.locator('#hide-textbox').click();
+   8 |     await expect(page.locator('[name="show-hide"]')).toBeHidden();
+   9 |     await page.locator('#show-textbox').click();
+  10 |     await expect(page.locator('[name="show-hide"]')).toBeVisible();
+  11 | })
+  12 |
+  13 | test("Present/NotPresent Assertion", async({page})=>{
+  14 |     await page.goto("https://the-internet.herokuapp.com/add_remove_elements/");
+  15 |     await expect(page.locator('[onclick="deleteElement()"]')).not.toHaveCount(1);
+  16 |     await page.locator('[onclick="addElement()"]').click();
+  17 |     await expect(page.locator('[onclick="deleteElement()"]')).toHaveCount(1);
+  18 |     await page.locator('[onclick="addElement()"]').click();
+  19 |     await expect(page.locator('[onclick="deleteElement()"]')).toHaveCount(2);
+  20 |     await page.locator('(//button[@onclick="deleteElement()"])[1]').click();
+  21 |     await expect(page.locator('[onclick="deleteElement()"]')).toHaveCount(1);
+  22 |     await page.locator('(//button[@onclick="deleteElement()"])[1]').click();
+  23 |     await expect(page.locator('[onclick="deleteElement()"]')).toHaveCount(0);
+  24 | })
+  25 |
+  26 | test("Text Match/Mismatch Assertion", async({page})=>{
+  27 |     await page.goto("https://opensource-demo.orangehrmlive.com");
+  28 |     await page.locator('[name="username"]').fill("Admin");
+  29 |     await page.locator('//input[@placeholder="password"]').fill("admin123");
+  30 |     await page.locator('[type="submit"]').click();
+  31 |     await expect(page.locator('.oxd-topbar-header-breadcrumb-module')).toBeVisible();
+  32 |     await expect(page.locator('.oxd-topbar-header-breadcrumb-module')).toHaveText('Dashboard');
+  33 |     await page.locator('a[href="/web/index.php/performance/viewPerformanceModule"]').click();
+  34 |     await expect(page.locator('.oxd-topbar-header-breadcrumb-module')).toBeVisible();
+  35 |     await expect(page.locator('.oxd-topbar-header-breadcrumb-module')).not.toHaveText('Dashboard');
+  36 | })
+  37 |
+  38 | test("Element Attribute Assertion", async({page})=>{
+  39 |     await page.goto("https://opensource-demo.orangehrmlive.com");
+  40 |     await expect(page.locator('[name="username"]')).toHaveAttribute('placeholder', 'Username');
+  41 | })
+  42 |
+  43 | test("URL Assertion", async({page})=>{
+  44 |     await page.goto("https://opensource-demo.orangehrmlive.com");
+  45 |     
+  46 |     //Full url assertion
+  47 |     //Method 1:
+  48 |     expect(page.url()).toEqual('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+  49 |
+  50 |     //Method 2:
+  51 |     await expect(page).toHaveURL('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+  52 |
+  53 |     //Partial url assertion
+  54 |     await expect(page).toHaveURL(/demo.orangehrmlive.com/); //Giving partial url using Regex
+  55 | })
+  56 |
+  57 | test("Title Assertion", async({page})=>{
+  58 |     await page.goto("https://opensource-demo.orangehrmlive.com");
+  59 |     
+  60 |     //Full title assertion
+  61 |     await expect(page).toHaveTitle('OrangeHRM');
+  62 |
+  63 |     //Partial title assertion
+  64 |     await expect(page).toHaveTitle(/Orange/); //Giving partial title using Regex
+  65 | })
+  66 |
+  67 | test("Screenshot Assertion", async({page})=>{
+  68 |     await page.goto("https://opensource-demo.orangehrmlive.com");
+  69 |     await page.locator('[name="username"]').fill("Admin");
+  70 |     await page.locator('[name="password"]').fill("admin123");
+> 71 |     await expect(page).toHaveScreenshot();
+     |                        ^ Error: expect(page).toHaveScreenshot(expected)
+  72 |     //test is failing because the original screenshot was taken after entering username but not password 
+  73 | })
+  74 |
+  75 | test("Enabled/disabled Assertion", async({page})=>{
+  76 |     await page.goto("https://letcode.in/button");
+  77 |     await expect(page.locator('#home')).toBeEnabled();
+  78 |     await expect(page.locator('[title="Disabled button"]')).toBeDisabled();
+  79 | })
+```

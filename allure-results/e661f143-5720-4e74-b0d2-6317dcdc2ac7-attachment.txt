@@ -1,0 +1,4 @@
+Clearing cookies
+Test 2 block
+Cache removal
+Database connection disconnect
